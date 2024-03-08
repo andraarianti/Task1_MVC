@@ -117,7 +117,13 @@ namespace SampleMVC.Controllers
 
         public IActionResult Edit(int id)
         {
-            var article = _articleBLL.GetArticleById;
+            var article = _articleBLL.GetArticleById(id);
+            ViewData["CategoryID"] = TempData["CategoryID"];
+            if (article == null)
+            {
+                TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Article Not Found !</div>";
+                return RedirectToAction("Details", "Articles", new { id = ViewData["CategoryID"] });
+            }
             return View(article);
         }
        

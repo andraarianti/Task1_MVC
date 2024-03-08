@@ -34,7 +34,7 @@
                                 <img src="@Url.Content($"~/Pics/{article.Pic}")" width="100" />
                             </td>
                             <td>
-                                <a href="#" class="btn btn-outline-warning btn-sm" onclick="editArticle('@article.ArticleID','@article.CategoryID')">Edit</a>
+                                <a asp-controller="Articles" asp-action="Edit" asp-route-id="@article.ArticleID" class="btn btn-outline-warning btn-sm">Edit</a>
                                 <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.ArticleID" onclick="return confirm('Yakin Mau Hapus ?')" class="btn btn-outline-danger btn-sm">Delete</a>
                             </td>
                         </tr>

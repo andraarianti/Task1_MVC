@@ -1,0 +1,46 @@
+﻿@model MyWebFormApp.BLL.DTOs.ArticleUpdateDTO
+
+<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit Article</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Edit Category</h6>
+            </div>
+            <div class="card-body">
+                @Html.Raw(ViewData["message"])
+                <form asp-action="Edit">
+                    <div class="form-group">
+                        <label for="CategoryID">Article ID :</label>
+                        <input type="text" class="form-control" name="ArticleID" readonly value="@Model.ArticleID" />
+                        <input type="text" class="form-control" name="ArticleID" readonly value="@Model.ArticleID" hidden="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryID">Category ID :</label>
+                        <input type="text" class="form-control" name="CategoryID" readonly value="@Model.CategoryID" />
+                        <input type="text" class="form-control" name="CategoryID" readonly value="@Model.CategoryID" hidden="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryName">Title :</label>
+                        <input type="text" class="form-control" name="Title" value="@Model.Title" />
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="chkIsApproved" asp-for="IsApproved" name="IsApproved" value="@Model.IsApproved" class="form-check-input" />
+                            Is Approved
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="Submit" class="btn btn-success btn-sm" value="Edit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
