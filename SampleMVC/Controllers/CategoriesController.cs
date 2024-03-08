@@ -109,19 +109,6 @@ public class CategoriesController : Controller
         return RedirectToAction("Index");
     }
 
-
-
-    public IActionResult Delete(int id)
-    {
-        var model = _categoryBLL.GetById(id);
-        if (model == null)
-        {
-            TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Category Not Found !</div>";
-            return RedirectToAction("Index");
-        }
-        return View(model);
-    }
-
     [HttpPost]
     public IActionResult Delete(int id, CategoryDTO category)
     {
@@ -135,8 +122,41 @@ public class CategoriesController : Controller
             TempData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
             return View(category);
         }
-        return RedirectToAction("Index");
+		return RedirectToAction("Articles", "Details", new { id = id });
+	}
+
+    public IActionResult GetDetailById()
+    {
+        //Intialized Category by ID on BLL
+        List<CategoryDTO> categoryDTO = new List<CategoryDTO>();
+        var categories = _categoryBLL.GetAll();
+        foreach (var item in categories)
+        {
+			categoryDTO.Add(new CategoryDTO
+            {
+				CategoryID = item.CategoryID,
+				CategoryName = item.CategoryName
+			});
+		}   
+
+        return View(categoryDTO);
     }
+
+    [HttpPost]
+    public IActionResult GetDetailById(int id, CategoryDTO category)
+    {
+		try
+		{
+			_categoryBLL.GetById(id);
+			TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Delete Data Category Success !</div>";
+		}
+		catch (Exception ex)
+		{
+			TempData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
+			return View(category);
+		}
+		return RedirectToAction("Articles", "Details", new { id = id });
+	}
 
 
 }

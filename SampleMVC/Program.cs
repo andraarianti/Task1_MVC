@@ -8,6 +8,8 @@ builder.Services.AddControllersWithViews();
 
 //register DI
 builder.Services.AddScoped<ICategoryBLL, CategoryBLL>();
+builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
+
 
 var app = builder.Build();
 
